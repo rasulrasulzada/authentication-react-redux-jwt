@@ -34,8 +34,9 @@ class Signup extends Component {
       password,
     };
     if (email || password) {
-      this.props.actions.signup(formData);
-      this.props.history.push("/profile");
+      this.props.actions.signup(formData, () => {
+        this.props.history.push("/profile");
+      });
     } else {
       this.setState({
         error: true,

@@ -6,21 +6,6 @@ import Signup from "./Signup";
 import Login from "./Login";
 import Profile from "./Profile";
 
-const validateToken = () => {
-  // check the expire time of token
-  return true;
-};
-
-const AuthRoute = (props) => {
-  const { path, component } = props;
-  if(validateToken()) {
-    return <Route path={path} exact component={component} />
-  } else {
-    return <Redirect to="/login" />
-    
-  }
-    
-}
 
 export default class App extends Component {
   render() {
@@ -32,7 +17,7 @@ export default class App extends Component {
             <Route path="/" exact component={Home} />
             <Route path="/signup" exact component={Signup} />
             <Route path="/login" exact component={Login} />
-            <AuthRoute pat="/profile" component={Profile}/>
+            <Route pat="/profile" exact component={Profile}/>
           </Switch>
         </div>
       </div>

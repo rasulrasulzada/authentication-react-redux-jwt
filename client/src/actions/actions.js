@@ -18,7 +18,7 @@ export const logout = () => {
   return { type: actionTypes.AUTH_USER, paylaod: "" };
 };
 
-export const signup = (userData) => {
+export const signup = (userData, callback) => {
   return async (dispatch) => {
     try {
       //request to backend and get token
@@ -27,15 +27,16 @@ export const signup = (userData) => {
         userData
       );
       const token = response.data.token;
-      localStorage.setItem("token", token);
       dispatch(signupSuccess(token));
+      localStorage.setItem("token", token);
+      callback();
     } catch (err) {
       dispatch(authError);
     }
   };
 };
 
-export const login = (userData) => {
+export const login = (userData, callback) => {
   return async (dispatch) => {
     try {
       //request to backend and get token
@@ -44,8 +45,9 @@ export const login = (userData) => {
         userData
       );
       const token = response.data.token;
-      localStorage.setItem("token", token);
       dispatch(signupSuccess(userData));
+      localStorage.setItem("token", token);
+      callback()
     } catch (err) {
       dispatch(authError);
     }

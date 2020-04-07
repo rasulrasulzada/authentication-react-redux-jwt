@@ -26,8 +26,9 @@ class Login extends Component {
       password,
     };
     if (username || email || password) {
-      this.props.actions.login(formData);
-      this.props.history.push("/profile");
+      this.props.actions.login(formData, () => {
+        this.props.history.push("/profile");
+      });
     } else {
       this.setState({
         error: true,
